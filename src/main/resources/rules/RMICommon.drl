@@ -1,0 +1,60 @@
+package ca.uqam.latece.j2ee.containerdep.rmi
+ 
+import ca.uqam.latece.j2ee.containerdep.kdmadapters.CallsAdapter;
+import ca.uqam.latece.j2ee.containerdep.kdmadapters.InterfaceUnitAdapter;
+import ca.uqam.latece.j2ee.containerdep.kdmadapters.ClassUnitAdapter; 
+import ca.uqam.latece.j2ee.containerdep.kdmadapters.MethodUnitAdapter; 
+/**
+* Set of rules specific to Remote Method Invocation
+* which are common to all EJB types (session, entity and message beans).  
+**/
+rule "BeanInvocation"
+    when
+    	$ejbHomeInterface : InterfaceUnitAdapter( isExtends("javax.ejb.EJBLocalHome") || isExtends("javax.ejb.EJBHome"))
+        $toMethod: MethodUnitAdapter ( enclosingInterface == $ejbHomeInterface, isNamedLike("(create)(.*)") )
+        $call : CallsAdapter( toMethod == $toMethod )
+    then
+    	String fromClassName=  $call.getEnclosingClass()!=null?$call.getEnclosingClass().getName():"??";
+    	String fromMethodName=  $call.getEnclosingMethod()!=null?$call.getEnclosingMethod().getName():"??";
+    	System.out.println( "[BeanInvocation] Found call from method "+fromClassName+"."+fromMethodName );
+    	
+    	ClassUnitAdapter beanClass = $ejbHomeInterface.getRelatedCodeUnitByStereotype("BEAN_CLASS");
+    	String methodNameInBeanClass = "ejbCreate"+$toMethod.getNameComponentNum("(create)(.*)",2);
+    	if(beanClass!=null){
+    		//System.out.println( "BeanClass is "+ beanClass.getName() );
+    		MethodUnitAdapter method4NewCall = 
+    				beanClass.getMethodByNameAndParameters(methodNameInBeanClass, $toMethod.getSignatureParameters());
+    		if(method4NewCall!=null){
+    			$call.createSiblingCallTo(method4NewCall);
+    			//System.out.println( "Adding call link to method "+ beanClass.getName()+"."+method4NewCall.getName() );
+    		}
+    	}
+end
+
+rule "BeanMethodCall"
+    when
+    	$ejbInterface : InterfaceUnitAdapter( isExtends("javax.ejb.EJBObject") || isExtends("javax.ejb.EJBLocalObject"))
+        $toMethod: MethodUnitAdapter ( enclosingInterface == $ejbInterface )
+        $call : CallsAdapter( toMethod == $toMethod )
+    then
+    	String fromClassName=  $call.getEnclosingClass()!=null?$call.getEnclosingClass().getName():"??";
+    	String fromMethodName=  $call.getEnclosingMethod()!=null?$call.getEnclosingMethod().getName():"??";
+    	System.out.println( "[BeanMethodCall] Found call from method "+fromClassName+"."+fromMethodName );
+    	
+    	ClassUnitAdapter beanClass = $ejbInterface.getRelatedCodeUnitByStereotype("BEAN_CLASS");
+    	String methodNameInBeanClass = $toMethod.getName();
+    	if(beanClass!=null){
+    		//System.out.println( "BeanClass is "+ beanClass.getName() );
+    		MethodUnitAdapter method4NewCall = 
+    				beanClass.getMethodByNameAndParameters(methodNameInBeanClass, $toMethod.getSignatureParameters());
+    		if(method4NewCall!=null){
+    			$call.createSiblingCallTo(method4NewCall);
+    			//System.out.println( "Adding call link to method "+ beanClass.getName()+"."+method4NewCall.getName() );
+    		}
+    	}
+end
+
+function boolean callToMethodName (CallsAdapter c, String name) {
+   MethodUnitAdapter m = (MethodUnitAdapter)c.getTo();
+   return m.getName().compareTo(name)==0;
+}

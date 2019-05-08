@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.modisco.infra.discovery.core.discoverer">
+      <discoverer
+            class="ca.uqam.latece.j2ee.containerdep.DiscoverContainerDependencyFromJavaProject"
+            id="ca.uqam.latece.j2ee.containerdep.ContainerDepDiscoverer">
+      </discoverer>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated EjbXML -->
+      <package
+            uri="ca.uqam.latece.j2ee.ejbxml"
+            class="ca.uqam.latece.j2ee.containerdep.EjbXml.EjbXmlPackage"
+            genModel="models/ecore/EjbXML.genmodel"/>
+   </extension>
+
+</plugin>

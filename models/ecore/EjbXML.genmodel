@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="© Anis Boubaker, LATECE Laboratory, University of Quebec at Montreal"
+    modelDirectory="/ca.uqam.latece.j2ee.containerdep/src/main/java" modelPluginID="ca.uqam.latece.j2ee.containerdep"
+    modelName="EjbXML" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" operationReflection="true"
+    importOrganizing="true">
+  <foreignModel>EjbXML.ecore</foreignModel>
+  <genPackages prefix="EjbXml" basePackage="ca.uqam.latece.j2ee.containerdep" disposableProviderFactory="true"
+      ecorePackage="EjbXML.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="EjbXML.ecore#//SessionBeanType">
+      <genEnumLiterals ecoreEnumLiteral="EjbXML.ecore#//SessionBeanType/Stateless"/>
+      <genEnumLiterals ecoreEnumLiteral="EjbXML.ecore#//SessionBeanType/Stateful"/>
+      <genEnumLiterals ecoreEnumLiteral="EjbXML.ecore#//SessionBeanType/Unspecified"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="EjbXML.ecore#//PersistenceType">
+      <genEnumLiterals ecoreEnumLiteral="EjbXML.ecore#//PersistenceType/Container"/>
+      <genEnumLiterals ecoreEnumLiteral="EjbXML.ecore#//PersistenceType/Bean"/>
+      <genEnumLiterals ecoreEnumLiteral="EjbXML.ecore#//PersistenceType/Unspecified"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="EjbXML.ecore#//BeanDescriptor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//BeanDescriptor/ejbName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//BeanDescriptor/ejbClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//BeanDescriptor/localHomeInterface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//BeanDescriptor/localInterface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//BeanDescriptor/remoteHomeInterface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//BeanDescriptor/remoteInterface"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EjbXML.ecore#//BeanDescriptor/enventry"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//BeanDescriptor/displayName"/>
+    </genClasses>
+    <genClasses ecoreClass="EjbXML.ecore#//EnvEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//EnvEntry/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//EnvEntry/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//EnvEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="EjbXML.ecore#//DeploymentDescriptor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EjbXML.ecore#//DeploymentDescriptor/enterpriseBeans"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//DeploymentDescriptor/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//DeploymentDescriptor/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//DeploymentDescriptor/displayName"/>
+    </genClasses>
+    <genClasses ecoreClass="EjbXML.ecore#//EntityBeanDescriptor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//EntityBeanDescriptor/persistenceType"/>
+    </genClasses>
+    <genClasses ecoreClass="EjbXML.ecore#//SessionBeanDescriptor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EjbXML.ecore#//SessionBeanDescriptor/type"/>
+    </genClasses>
+    <genClasses ecoreClass="EjbXML.ecore#//MessageBeanDescriptor"/>
+  </genPackages>
+</genmodel:GenModel>

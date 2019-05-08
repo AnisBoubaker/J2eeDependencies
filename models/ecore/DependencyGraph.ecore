@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="DependencyGraph" nsURI="ca.uqam.latece.j2ee.containerdep.dependencygraph"
+    nsPrefix="depgraph">
+  <eClassifiers xsi:type="ecore:EClass" name="DGCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//DGMethod"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//DGMethod"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kdmCall" eType="ecore:EClass platform:/plugin/org.eclipse.gmt.modisco.omg.kdm/model/kdm.ecore#//action/Calls"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="frameworkSpecific" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DGMethod">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kdmMethod" eType="ecore:EClass platform:/plugin/org.eclipse.gmt.modisco.omg.kdm/model/kdm.ecore#//code/MethodUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DGClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
+        eType="#//DGMethod" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kdmClass" eType="ecore:EClass platform:/plugin/org.eclipse.gmt.modisco.omg.kdm/model/kdm.ecore#//code/ClassUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DGraph">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calls" upperBound="-1"
+        eType="#//DGCall" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
+        eType="#//DGPackage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DGPackage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
+        eType="#//DGClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kdmPackage" eType="ecore:EClass platform:/plugin/org.eclipse.gmt.modisco.omg.kdm/model/kdm.ecore#//code/Package"/>
+  </eClassifiers>
+</ecore:EPackage>

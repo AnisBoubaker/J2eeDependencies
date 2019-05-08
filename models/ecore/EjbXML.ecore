@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="EjbXml" nsURI="ca.uqam.latece.j2ee.ejbxml" nsPrefix="ejbxml">
+  <eClassifiers xsi:type="ecore:EClass" name="BeanDescriptor" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ejbName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ejbClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="localHomeInterface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="localInterface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="remoteHomeInterface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="remoteInterface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enventry" upperBound="-1"
+        eType="#//EnvEntry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SessionBeanType">
+    <eLiterals name="Stateless" value="1"/>
+    <eLiterals name="Stateful" value="2"/>
+    <eLiterals name="Unspecified" literal="Unspecified"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnvEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeploymentDescriptor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enterpriseBeans" upperBound="-1"
+        eType="#//BeanDescriptor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PersistenceType">
+    <eLiterals name="Container" value="1"/>
+    <eLiterals name="Bean" value="2"/>
+    <eLiterals name="Unspecified"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntityBeanDescriptor" eSuperTypes="#//BeanDescriptor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="persistenceType" eType="#//PersistenceType"
+        defaultValueLiteral="Unspecified"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SessionBeanDescriptor" eSuperTypes="#//BeanDescriptor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//SessionBeanType"
+        defaultValueLiteral="Unspecified"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageBeanDescriptor" eSuperTypes="#//BeanDescriptor"/>
+</ecore:EPackage>
